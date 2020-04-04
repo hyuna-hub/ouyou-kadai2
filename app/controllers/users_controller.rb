@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   def index
   	@users = User.all #一覧表示するためにUserモデルのデータを全て変数に入れて取り出す。
   	@book = Book.new #new bookの新規投稿で必要（保存処理はbookコントローラー側で実施）
+  end
 
   def new
     @user = User.new
@@ -52,7 +53,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-  	params.require(:user).permit(:name, :introduction, :profile_image)
+  	params.require(:user).permit(:name, :email, :password, :password_confirmation, :profile_image, :introduction)
   end
 
   #url直接防止　メソッドを自己定義してbefore_actionで発動。
@@ -61,6 +62,7 @@ class UsersController < ApplicationController
   		redirect_to user_path(current_user)
   	end
    end
-
   end
+
+end
 end
